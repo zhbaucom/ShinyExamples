@@ -1,0 +1,191 @@
+---
+title: "BSA Presentation"
+author: "Zach Baucom"
+date: "March 28, 2019"
+output: ioslides_presentation
+runtime: shiny
+---
+
+# Shiny... What is it?
+
+## From the makers
+
+"Shiny is an R package that makes it easy to build interactive web apps straight from R. You can host standalone apps on a webpage or embed them in R Markdown documents or build dashboards. You can also extend your Shiny apps with CSS themes, htmlwidgets, and JavaScript actions."
+
+-https://shiny.rstudio.com/
+
+Some fun examples:
+
+https://shiny.rstudio.com/gallery/
+
+## My Experience
+
+* Study math at the University of Utah
+* In the fall of 2016 I joined UDOH as an intern
+* Upon graduating I became a full time epidemiogy analyst
+* Had a lot of flexibility to learn all things R
+
+## Starting Out
+
+* Had an ineffecient abberation detection system of infectious diseases
+* We would only run the system weekly because we had a pdf for each health jurisdiction and each disease 
+* 14 health jurisdictions x 64 diseases = Too Many Plots
+* The solution?
+
+## Shiny
+
+
+
+```{r echo=FALSE, out.width='100%'}
+# knitr::include_graphics("images/Shiny.PNG")
+renderImage({
+    list(src = "images/Shiny.PNG",
+     contentType = 'image/PNG',
+     width = 800,
+     height = 500,
+     alt = "Picture did not load...")
+  })
+
+```
+
+
+## Functions in R
+
+Suppose we wanted to create a function whose inputs are two of the column names of the `iris` data set and the output is a plot with one column on the x-axis and the other on the y-axis. Let this function also print out the `iris` dataset.
+
+How do we do it???
+
+## Iris.Function
+
+```{r}
+Iris.Function <- function(xax, yax){
+  plot(iris[,xax], iris[,yax])
+  iris
+}
+```
+
+
+
+```{r}
+colnames(iris)
+```
+
+
+## Iris.Function Output
+
+```{r, fig.length = 2, fig.width=6}
+Iris.Function("Sepal.Length", "Sepal.Width")
+```
+
+
+## Iris.Function Output
+
+```{r}
+Iris.Function("Sepal.Length", "Petal.Length")
+```
+
+## Shiny Functionality
+
+Shiny is a big function.
+
+* UI portion where the inputs to the function are defined
+
+    + The inputs are defined by widgets
+  
+* Server portion is where the computation occurs
+
+    + The server is where the output is rendered
+    
+    
+## Widgets Defining Input
+
+```{r, include = FALSE}
+library(shiny)
+```
+
+```{r, eval = FALSE}
+
+dateInput(inputId = "w1", label = "Date Input", value = Sys.Date()))
+radioButtons(inputId = "w2", label = "Radio Buttons", choices = c("A", "B", "C"))
+selectizeInput(inputId = "w3", label = "Selectize Input", choices = c("A", "B", "C"))
+numericInput(inputId = "w4", label = "Numeric Input", value = 0))
+numericInput(inputId = "w4", label = "Numeric Input", value = 0))
+sliderInput(inputId = "w5", label = "Slider Input", value = 10, min = 0, max = 100))
+checkboxInput(inputId = "w6", label = "check box", value = FALSE)
+```
+
+## What it looks like
+
+```{r, echo = FALSE}
+fluidRow(
+  column(6,
+         dateInput(inputId = "w1", label = "Date Input", value = Sys.Date())),
+  column(6,
+         br(),
+         renderText({paste("input$w1 =", input$w1)}))
+)
+fluidRow(
+  column(6,
+         radioButtons(inputId = "w2", label = "Radio Buttons", choices = c("A", "B", "C"))),
+  column(6,
+         br(),
+         renderText({paste("input$w2 =", input$w2)}))
+)
+fluidRow(
+  column(6,
+         selectizeInput(inputId = "w3", label = "Selectize Input", choices = c("A", "B", "C"))),
+  column(6,
+         br(),
+         renderText({paste("input$w3 =", input$w3)}))
+)
+fluidRow(
+  column(6,
+         numericInput(inputId = "w4", label = "Numeric Input", value = 0)),
+  column(6,
+         br(),
+         renderText({paste("input$w4 =", input$w4)}))
+)
+fluidRow(
+  column(6,
+         sliderInput(inputId = "w5", label = "Slider Input", value = 10, min = 0, max = 100)),
+  column(6,
+         br(),
+         renderText({paste("input$w5 =", input$w5)}))
+)
+fluidRow(
+  column(6,
+         checkboxInput(inputId = "w6", label = "check box", value = FALSE)),
+  column(6,
+         renderText({paste("input$w6 =", input$w6)}))
+)
+```
+
+
+## More Widgets
+
+https://shiny.rstudio.com/gallery/widget-gallery.html
+
+## Let's look at renders
+
+```{r,eval = FALSE}
+renderPlot({})
+renderTable({})
+renderPrint({})
+renderText({})
+renderImage({})
+renderDataTable({})
+renderPlotly({})
+```
+
+## Render Example
+
+```{r}
+selectizeInput("Interests", "What do you like to do?", choices = c("study for quals.", "go to the movies.", "go on runs.", "SLEEP!!!"))
+
+renderText({paste("I like to", input$Interests)})
+```
+
+
+
+
+

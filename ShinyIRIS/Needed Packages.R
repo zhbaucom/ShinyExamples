@@ -1,0 +1,6 @@
+install.packages("shiny")
+install.packages("ggplot2")
+install.packages("plotly")
+install.packages("DT")
+install.packages("crosstalk")
+install.packages("dplyr")
