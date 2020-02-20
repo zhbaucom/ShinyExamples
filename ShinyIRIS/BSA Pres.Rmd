@@ -39,8 +39,8 @@ https://shiny.rstudio.com/gallery/
 ```{r echo=FALSE, out.width='100%'}
 # knitr::include_graphics("images/Shiny.PNG")
 renderImage({
-    list(src = "images/Shiny.PNG",
-     contentType = 'image/PNG',
+    list(src = "images/Shiny.jpg",
+     contentType = 'image/JPG',
      width = 800,
      height = 500,
      alt = "Picture did not load...")
