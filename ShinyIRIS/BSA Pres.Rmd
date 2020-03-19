@@ -20,7 +20,7 @@ https://shiny.rstudio.com/gallery/
 
 ## My Experience
 
-* Study math at the University of Utah
+* Studied math at the University of Utah
 * In the fall of 2016 I joined UDOH as an intern
 * Upon graduating I became a full time epidemiogy analyst
 * Had a lot of flexibility to learn all things R
